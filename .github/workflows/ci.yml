@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [develop]
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v2
+      - name: Use NodeJs
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: Installing all dependencies
+        run: npm ci
+      - name: Checking code style
+        run: npm run format:check
+      - name: Run all test case and generate code coverage report
+        run: npm test -- --coverage
+        env:
+          CI: true
