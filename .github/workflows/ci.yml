@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - develop
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v2
+      - name: Use NodeJs
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: Installing all dependencies
+        run: npm ci
+      - name: Checking code style
+        run: npm run format:check
+      - name: Run all test case and generate code coverage report
+        run: npm test -- --coverage
+        env:
+          CI: true
+      - name: Build Project
+        if: github.event_name == 'push'
+        run: npm run build
+      - name: Installing Surge
+        if: github.event_name == 'push'
+        run: npm install -g surge
+      - name: Deploy to Staging
+        if: github.event_name == 'push'
+        run: surge --project ./build --domain http://important-reading.surge.sh/
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
