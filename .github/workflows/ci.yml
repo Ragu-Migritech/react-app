@@ -2,7 +2,11 @@ name: CI
 
 on:
   pull_request:
-    branches: [develop]
+    branches: 
+      - develop
+  push:
+    branches:
+      - develop
 
 jobs:
   build:
@@ -22,3 +26,15 @@ jobs:
         run: npm test -- --coverage
         env:
           CI: true
+      - name: Build Project
+        if: github.event_name == 'push'
+        run: npm run build
+      - name: Installing Surge 
+        run: npm install -g surge
+      - name: Deploy to Staging
+        if: github.event_name == 'push'
+        run: surge --project ./build --domain http://important-reading.surge.sh/
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+          
