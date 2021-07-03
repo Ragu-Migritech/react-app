@@ -1,0 +1,4 @@
+* @ragu
+*.js @ragu
+*.yml @ragu
+/public/ @ragu
