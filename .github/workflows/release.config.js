@@ -1,5 +1,5 @@
 module.exports = {
-  branches: [{name: "main", prerelease: true}],
+  branches: ["main"],
   repositoryUrl: "https://github.com/Ragu-Migritech/react-app",
   plugins: [
     "@semantic-release/commit-analyzer",
