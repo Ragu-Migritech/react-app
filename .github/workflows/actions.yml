@@ -9,8 +9,9 @@ jobs:
       - name: Calling our custom actions
         id: hello
         uses: ./.github/actions/hello
-        with: 
+        with:
           who-to-greet: "Ragu"
       - name: Printing the outputs
         run: |
           echo "Time: ${{steps.hello.outputs.time}}"
+          echo $HELLO
