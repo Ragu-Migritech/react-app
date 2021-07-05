@@ -1,0 +1,16 @@
+name: Custom actions
+on: push
+jobs:
+  testing-custom-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checking out our code
+        uses: actions/checkout@v2
+      - name: Calling our custom actions
+        id: hello
+        uses: ./.github/actions/hello
+        with: 
+          who-to-greet: "Ragu"
+      - name: Printing the outputs
+        run: |
+          echo "Time: ${{steps.hello.outputs.time}}"

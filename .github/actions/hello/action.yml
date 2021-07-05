@@ -1,0 +1,14 @@
+name: Hello world
+author: Ragu
+description: my first actions
+inputs:
+  who-to-greet:
+    description: "who to greet"
+    required: true
+    default: "World"
+outputs:
+  time:
+    description: "The Greeting time"
+runs:
+  using: "node12"
+  main: "dist/index.js"
