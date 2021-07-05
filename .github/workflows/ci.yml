@@ -50,9 +50,9 @@ jobs:
           name: build
           path: build
       - name: Create a Release
-        if: github.event_name == 'push' && github.ref ==  'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: npx semantic-release
-        env: 
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB }}
       - name: Installing Surge
         if: github.event_name == 'push'
