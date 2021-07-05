@@ -35,7 +35,7 @@ jobs:
           CI: true
       - name: Upload Test coverage
         uses: actions/upload-artifact@v1
-        with: 
+        with:
           name: code-coverage
           path: coverage
       - name: Build Project
@@ -43,7 +43,7 @@ jobs:
         run: npm run build
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v1
-        with: 
+        with:
           name: build
           path: build
       - name: Installing Surge
