@@ -14,8 +14,7 @@ jobs:
           title: title
           body: Body
           assignees: |
-            Ragu
-            Sathya
+            Ragu-Migritech
       - name: Printing output of custom actions
         run: |
           echo ${{ steps.issue.outputs.issue }}
