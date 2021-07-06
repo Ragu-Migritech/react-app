@@ -6,6 +6,19 @@ jobs:
     steps:
       - name: checking out our code
         uses: actions/checkout@v2
+      - name: Calling our custom actions of creating issue
+        id: issue
+        uses: ./.github/actions/issue
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}
+          title: title
+          body: Body
+          assignees: |
+            Ragu
+            Sathya
+      - name: Printing output of custom actions
+        run: |
+          echo ${{ steps.issue.outputs.issue }}
       - name: Calling our custom actions
         id: hello
         uses: ./.github/actions/hello
