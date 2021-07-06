@@ -3757,9 +3757,10 @@ try {
     assignees: assignees ? assignees.split('\n') : undefined 
   }).then(response => {
     core.setOutput('issue', JSON.stringify(response.data))
-  });
-
-
+  }).catch(error => {
+    console.log("Error: "+ error); 
+    throw error;
+  })
 } catch (error) {
   core.setFailed(error.message);
 }
