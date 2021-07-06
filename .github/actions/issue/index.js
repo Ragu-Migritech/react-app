@@ -9,14 +9,16 @@ try {
 
   const octokit = new github.getOctokit(token);
 
-  const response = octokit.rest.issues.create({
+  octokit.rest.issues.create({
     ...github.context.repo,
     title,
     body,
     assignees: assignees ? assignees.split('\n') : undefined 
+  }).then(response => {
+    core.setOutput('issue', JSON.stringify(response.data))
   });
 
-  core.setOutput('issue', JSON.stringify(response.data))
+
 } catch (error) {
   core.setFailed(error.message);
 }
